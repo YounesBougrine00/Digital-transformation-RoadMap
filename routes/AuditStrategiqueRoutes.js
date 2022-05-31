@@ -1,13 +1,15 @@
 const express = require("express");
+const auth = require('../middleware/auth');
 const router = express.Router();
 const questionsauditstrategics = require("../models/QuestionStrategique.js");
 const objectivesstrategics = require("../models/objectivesstrategics.js");
 const HistoriqueResponseAuditStrategique = require("../models/historiqueResponseAuditStrategique.js");
 
 //Enregistrement des reponses et des resultats de l'audit dans la base donnees
-router.post("/", async(req, res) => {
-    const objectifs = ["objectif 1", "objectif 2"];
+router.post("/",auth, async(req, res) => {
+    const objectifs = objectivesstrategics.find();
     const rep = req.body;
+    co
     console.log(algo(rep, objectifs));
     const NewHistoriqueResponseAuditStrategique =
         new HistoriqueResponseAuditStrategique(algo(rep, objectifs));
@@ -21,7 +23,7 @@ router.post("/", async(req, res) => {
 });
 
 //Get des questions de l'audit strategique
-router.get("/", async(req, res) => {
+router.get("/",auth, async(req, res) => {
     try {
         const questionsStrategics = await questionsauditstrategics.find({});
         res.status(200).json(questionsStrategics);
@@ -31,7 +33,7 @@ router.get("/", async(req, res) => {
 });
 
 //Get des objectives strategiques
-router.get("/objectives-strategics", async(req, res) => {
+router.get("/objectives-strategics",auth, async(req, res) => {
     try {
         const objectivesStrategics = await objectivesstrategics.find({});
         res.status(200).json(objectivesStrategics);
@@ -41,7 +43,7 @@ router.get("/objectives-strategics", async(req, res) => {
 });
 
 //Get des reponses et et des resultats d'un utilisateur
-router.get("/:userId", async(req, res) => {
+router.get("/:userId", auth,async(req, res) => {
     try {
         const historique = await HistoriqueResponseAuditStrategique.find({
             userId: req.params.userId,
