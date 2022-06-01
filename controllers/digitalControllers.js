@@ -4,6 +4,18 @@ const { Levels } = require("../models/levels");
 
 const choicesController = {
 
+    //Get all choices
+    getAllChoices: async(req, res) => {
+        try {
+            const choices = await Choices.find();
+            if (choices.length == 0)
+                return res.status(400).json({ message: "No choices yet" });
+            res.status(200).json(choices);
+        } catch (error) {
+            return res.status(500).json({ message: error.message });
+        }
+    },
+
     //Get choices by axe of digital audit, you need to pass the axe id in the URL
     /**
      * 
@@ -121,7 +133,7 @@ const choicesController = {
         }
     },
 
-    // send the coices like this [ { axe_id : ... , "levels" : [levelID1, levelID1, ....]} ]
+    // send the coices like this [ { axe_id : ... , "levels" : [levelID1, levelID1, ....]}, ]
     /**
      * 
      * @param {*} req send a list of choices in this format : [ { axe_id : ... , "levels" : [levelID1, levelID1, ....]} ]

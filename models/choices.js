@@ -11,7 +11,7 @@ const choiceSchema = new mongoose.Schema({
     },
     level_id: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'stadiums'
+        ref: 'levels'
     },
 })
 

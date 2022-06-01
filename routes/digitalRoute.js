@@ -37,6 +37,9 @@ router.get("/get-choices/:aid", choicesController.getChoicesByAxe)
 // you should provide the level id in the request body
 router.get("/get-choices-by-level", choicesController.getChoicesByLevel)
 
+//get all choices
+router.get("/get-all-choices", choicesController.getAllChoices)
+
 /** 
  * add a choice with associating the level name and axe name
  * @param, choice, axe, level
