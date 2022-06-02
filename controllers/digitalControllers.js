@@ -53,6 +53,19 @@ const choicesController = {
         }
     },
 
+    //Get choices by axe and level
+    getChoicesByLevelAxe: async(req, res) => {
+        try {
+            const { level } = req.body;
+            const choices = await Choices.find({ axe_id: req.params.aid, level_id: req.params.lid });
+            if (choices.length == 0)
+                return res.status(400).json({ message: "No choices yet" });
+            res.status(200).json(choices);
+        } catch (error) {
+            return res.status(500).json({ message: error.message });
+        }
+    },
+
     // Add choices with provided level and axe
     /**
      * 
@@ -75,16 +88,15 @@ const choicesController = {
             }
 
             const levelID = await Levels.find({ name: level });
-            if (!levelID) {
+            if (levelID.length == 0) {
                 return res.status(400).send({ message: "Invalid level name" });
             }
 
             const axeID = await Axes.find({ name: axe });
-            if (!axeID) {
+            if (axeID.length == 0) {
                 return res.status(400).send({ message: "Invalid axe name" });
             }
-            console.log(axeID[0]._id)
-            console.log(levelID[0]._id)
+
 
             await new Choices({ name: choice, axe_id: axeID[0]._id, level_id: levelID[0]._id }).save()
             res.status(200).json({ message: "Choice added succefully" });
