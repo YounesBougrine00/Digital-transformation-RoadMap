@@ -8,9 +8,6 @@ const levelSchema = new mongoose.Schema({
     degree: {
         type: Number,
         required: true,
-    },
-    initiatives: {
-        type: [String],
     }
 })
 

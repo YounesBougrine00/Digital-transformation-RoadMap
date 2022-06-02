@@ -5,9 +5,9 @@ const levelController = {
 
     addLevel: async(req, res) => {
         try {
-            const { name, degree, initiatives } = req.body
+            const { name, degree } = req.body
 
-            if (!name || !degree || (initiatives.lenght == 0)) {
+            if (!name || !degree) {
                 return res.status(400).json({ message: "Please fill in all fields." });
             }
 

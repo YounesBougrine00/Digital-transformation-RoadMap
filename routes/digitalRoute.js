@@ -40,6 +40,10 @@ router.get("/get-choices-by-level", choicesController.getChoicesByLevel)
 //get all choices
 router.get("/get-all-choices", choicesController.getAllChoices)
 
+//get choices by axe id and level id 
+router.get("/get-choices-by-filters/:aid/:lid", choicesController.getChoicesByLevelAxe)
+
+
 /** 
  * add a choice with associating the level name and axe name
  * @param, choice, axe, level
