@@ -7,12 +7,16 @@ const HistoriqueResponseAuditStrategique = require("../models/historiqueResponse
 
 //Enregistrement des reponses et des resultats de l'audit dans la base donnees
 router.post("/",auth, async(req, res) => {
-    const objectifs = objectivesstrategics.find();
+    const objectifs =await objectivesstrategics.find();
+    const charObjectives=[]
+    for (let key in objectifs){
+        charObjectives.push(objectifs[key].objective)
+    }
+    console.log(charObjectives)
+
     const rep = req.body;
-    co
-    console.log(algo(rep, objectifs));
     const NewHistoriqueResponseAuditStrategique =
-        new HistoriqueResponseAuditStrategique(algo(rep, objectifs));
+        new HistoriqueResponseAuditStrategique(algo(rep, charObjectives));
     try {
         const SavedHistoriqueResponseAuditStrategique =
             await NewHistoriqueResponseAuditStrategique.save();
@@ -63,7 +67,7 @@ const algo = (rep, objectifs) => {
             if (rep.responses[response].objective === objectifs[objectif]) {
                 score +=
                     rep.responses[response].response.score *
-                    rep.responses[response].percentage;
+                    rep.responses[response].percentage/100;
             }
         }
         selectedObjectives = [
@@ -72,7 +76,6 @@ const algo = (rep, objectifs) => {
         ];
     }
     rep.selectedObjectives = selectedObjectives;
-    console.log(rep);
     return rep;
 };
 

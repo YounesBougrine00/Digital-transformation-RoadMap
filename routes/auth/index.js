@@ -11,8 +11,7 @@ router.post("/signup", async(req, res) => {
     const {
         email,
         password,
-        firstName,
-        lastName
+        name
     } = req.body;
 
     const user = await User.findOne({
@@ -30,8 +29,7 @@ router.post("/signup", async(req, res) => {
     const result = User({
         email,
         password: passwordHash,
-        firstName,
-        lastName,
+        name,
     });
 
     await result.save();
