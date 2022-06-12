@@ -56,7 +56,6 @@ const choicesController = {
     //Get choices by axe and level
     getChoicesByLevelAxe: async(req, res) => {
         try {
-            const { level } = req.body;
             const choices = await Choices.find({ axe_id: req.params.aid, level_id: req.params.lid });
             if (choices.length == 0)
                 return res.status(400).json({ message: "No choices yet" });
