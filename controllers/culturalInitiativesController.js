@@ -12,7 +12,7 @@ const CultutralInitiativesCtrl = {
             let results = [];
 
             await Promise.all(
-                cultural_data.map((item) => {
+                cultural_data.map(async(item) => {
 
                     if (item.score < 4) {
                         let initiatives = await CulturalInitiatives.find({ cultural_axe: item.cultural_axe, degree: { $lt: 4 } })

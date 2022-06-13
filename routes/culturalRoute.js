@@ -2,8 +2,10 @@ const router = require("express").Router();
 
 const culturalController = require("../controllers/culturalController")
 const CultutralInitiativesCtrl = require("../controllers/culturalInitiativesController")
+const CulturalAxesController = require("../controllers/culturalAxesController")
 
 // Cultural audit routes
+router.get("/get-cultural-axes", CulturalAxesController.getAllAxes)
 
 //Get all cultural questions
 router.get("/get-cultural-questions", culturalController.getAllQuestions)

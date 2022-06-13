@@ -1,4 +1,4 @@
-const { CulturalAxes } = require("../models/culturalAxes");
+const { AxesCultureData } = require("../models/culturalAxes");
 
 
 const CulturalAxesController = {
@@ -11,7 +11,7 @@ const CulturalAxesController = {
                 return res.status(400).json({ message: "Please fill the name field." });
             }
 
-            await new CulturalAxes({...req.body }).save()
+            await new AxesCultureData({...req.body }).save()
             res.status(201).json({ message: "Cultural axe added succefully" });
         } catch (error) {
             return res.status(500).json({ message: error.message });
@@ -24,7 +24,7 @@ const CulturalAxesController = {
                 return res.status(400).json({ message: "Axe Id not given." });
             }
 
-            await CulturalAxes.findByIdAndDelete(axeID)
+            await AxesCultureData.findByIdAndDelete(axeID)
             res.status(200).json({ message: "Cultural axe deleted succefully" });
 
         } catch (error) {
@@ -34,7 +34,7 @@ const CulturalAxesController = {
     updateAxeName: async(req, res) => {
         try {
             const { axe_name } = req.body
-            await CulturalAxes.findByIdAndUpdate(req.params.aid, { name: axe_name })
+            await AxesCultureData.findByIdAndUpdate(req.params.aid, { name: axe_name })
             res.status(200).json({ message: "Axe Updated succefully" });
 
         } catch (error) {
@@ -48,7 +48,7 @@ const CulturalAxesController = {
                 return res.status(400).json({ message: "Axe Id not given." });
             }
 
-            const axe = await CulturalAxes.findById(axeID)
+            const axe = await AxesCultureData.findById(axeID)
             if (!axe) {
                 return res.status(400).json({ message: "Cultural axe not found." });
             }
@@ -61,7 +61,7 @@ const CulturalAxesController = {
     },
     getAllAxes: async(req, res) => {
         try {
-            const axes = await CulturalAxes.find()
+            const axes = await AxesCultureData.find()
 
             res.status(200).json(axes);
 

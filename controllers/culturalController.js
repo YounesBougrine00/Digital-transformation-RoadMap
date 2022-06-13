@@ -39,7 +39,7 @@ const culturalController = {
             responses.map((item) => {
                 let average;
                 average = item.scores.reduce((a, b) => a + b, 0) / item.scores.length;
-                results.push({ "cultural_axe": item.cultural_axe, "level": average })
+                results.push({ "cultural_axe": item.cultural_axe, "score": average })
             })
 
             console.log(` cultural results ${JSON.stringify(results)}`)
