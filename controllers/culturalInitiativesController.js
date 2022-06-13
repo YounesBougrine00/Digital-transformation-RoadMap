@@ -22,17 +22,29 @@ const CultutralInitiativesCtrl = {
         try {
             const { cultural_data } = req.body
             let results = [];
+            let initiative = []
 
             await Promise.all(
                 cultural_data.map(async(item) => {
 
                     if (item.score < 4) {
                         let initiatives = await CulturalInitiatives.find({ cultural_axe: item.cultural_axe, degree: { $lt: 4 } })
-                        results.push({ "cultural_axe": item.cultural_axe, "initiatives": initiatives })
+                        initiatives.map((item) => {
+                            item.initiatives.map((ele) => {
+                                initiative.push(ele)
+                            })
+                        })
+                        results.push({ "cultural_axe": item.cultural_axe, "initiatives": initiative })
 
                     } else {
                         let initiatives = await CulturalInitiatives.find({ cultural_axe: item.cultural_axe, degree: { $gte: 4 } })
-                        results.push({ "cultural_axe": item.cultural_axe, "initiatives": initiatives })
+                        initiatives.map((item) => {
+                            item.initiatives.map((ele) => {
+                                initiative.push(ele)
+                            })
+                        })
+                        results.push({ "cultural_axe": item.cultural_axe, "initiatives": initiative })
+
 
                     }
                 })
