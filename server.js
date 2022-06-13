@@ -22,7 +22,7 @@ app.use(cookieParser())
 
 
 app.use('/api/digital-audit', digitalRouter)
-app.use('/api/cultural-audit', culturalRouter)
+// app.use('/api/cultural-audit', culturalRouter)
 app.use("/api/audit-strategique", AuditStrategiqueRoutes);
 app.use("/", AuthRoutes);
 
