@@ -10,7 +10,7 @@ const CulturalInitiativesSchema = new mongoose.Schema({
         required: true
     },
     initiatives: {
-        type: [String],
+        type: [{ _id: String, initiative: String }],
         required: true
     },
 })

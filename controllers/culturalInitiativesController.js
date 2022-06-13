@@ -5,6 +5,18 @@ const { CulturalInitiatives } = require("../models/culturalInitiatives");
 
 
 const CultutralInitiativesCtrl = {
+
+    //Get all
+    getData: async(req, res) => {
+        try {
+            const axes = await CulturalInitiatives.find()
+
+            res.status(200).json(axes);
+
+        } catch (error) {
+            return res.status(500).json({ message: error.message });
+        }
+    },
     //Get initiatives by providing the axe name and its degree [ {cultural_axe : ..., score : }]
     getInitiatives: async(req, res) => {
         try {

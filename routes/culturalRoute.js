@@ -43,4 +43,8 @@ router.post("/send-cultural-responses", culturalController.sendCulturalResponses
  */
 router.post("/get-cultural-initiatives", CultutralInitiativesCtrl.getInitiatives)
 
+//Get all initiatives data
+router.get("/get-cultural-initiatives-all", CultutralInitiativesCtrl.getData)
+
+
 module.exports = router
